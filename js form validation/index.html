@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript form validation</title>
+    <style>
+        body {
+            padding: 10px 50px;
+        }
+
+        .formdesign {
+            font-size: 20px;
+        }
+
+        .formdesign input,
+        textarea {
+            width: 50%;
+            padding: 12px 20px;
+            border: 1px solid blue;
+            margin: 14px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        .formerror {
+            color: red;
+        }
+
+        .but {
+            border-radius: 9%;
+            width: 100px;
+            height: 50px;
+            font-size: 25px;
+            margin: 22px 10px;
+        }
+
+        /* .services{
+            width: 30%;
+        } */
+        .other {
+            width: 10%;
+            padding: 12px 20px;
+            border: 1px solid blue;
+            margin: 14px;
+            border-radius: 4px;
+            font-size: 10px;
+        }
+
+        .com {
+            width: 40%;
+            height: 100px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+        }
+
+        .date {
+            width: 80px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to the best form on internet</h1>
+    <form action="/myaction.php" name="myForm" onsubmit="return validiateForm()" method="post">
+        <div class="formdesign" id="name">
+            Name: <input type="text" name="fname" required><span class="formerror"><b></b></span>
+        </div>
+        <div class="formdesign" id="email">
+            Email: <input type="" name="femail" required><span class="formerror"><b></b></span>
+        </div>
+        <div class="formdesign" id="phone">
+            Phone: <input type="phone" name="fphone" required><span class="formerror"><b></b></span>
+        </div>
+        <div>
+            <p class="formdesign">Services:</p>
+            <label for="Web-Development">
+                <input type="radio" class="services" id="Web-Development" name="services" value="Web-Development" />
+                Web Development
+            </label>
+            <label for="Responsive-Design">
+                <input type="radio" class="services" id="Responsive-Design" name="services" value="Responsive-Design" />
+                Responsive Design
+            </label>
+            <label for="Troubleshooting and Debugging">
+                <input type="radio" class="services" id="Troubleshooting-and-Debugging" name="services"
+                    value="Troubleshooting-and-Debugging" />
+                Troubleshooting and Debugging
+            </label><br>
+            <label for="others">
+                <input class="type" type="radio" class="services" id="others" name="services" value="others"
+                    onchange="toggleOtherServices()" />
+                Others Services</label>
+            <input class="type other" id="otherServicesInput" style="display: none;" />
+
+            <!-- <div class="formdesign" id="comments">
+                Comments:<textarea type="comments" name="fcomments" rows="10" cols="100"></textarea>
+           
+        </div> -->
+        </div>
+
+        <label for="bookingDate" class="formdesign">Select a booking date:</label>
+        <input type="date" id="bookingDate" class="date" required>
+
+        </div>
+        <div>
+            <label for="comments" class="formdesign">
+                Comments: <textarea class="type com"></textarea>
+            </label>
+        </div>
+        <div>
+            <input class="but" type="submit" value="submit">
+
+    </form>
+
+</body>
+
+<script>
+    function clearErrors() {
+        errors = document.getElementsByClassName('formerror');
+        for (let item of errors) {
+            item.innerHTML = "";
+        }
+    }
+
+    function seterror(id, error) {
+        element = document.getElementById(id);
+        element.getElementsByClassName('formerror')[0].innerHTML = error;
+    }
+
+    function validiateForm() {
+        var returnval = true;
+
+        clearErrors();
+
+        var name = document.forms['myForm']["fname"].value;
+        if (name.length < 5) {
+            seterror("name", "* Length of name is too short")
+            returnval = false;
+        }
+        var email = document.forms['myForm']["femail"].value;
+        if (email.length > 20) {
+            seterror("email", "* Length of email is too long")
+            returnval = false;
+        }
+        if (!email.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+            seterror("email", "* Enter a valid email address")
+            returnval = false;
+        }
+
+        // var phone = document.forms['myForm']["fphone"].value;
+        // if (phone.length != 10) {
+        //     seterror("phone", "* Length of phone must be 10")
+        //     returnval = false;
+        // }
+        // if (!phone.match(/^[-0-9])){
+        //     seterror("phone", "* Enter a valid phone number")
+        //     returnval = false;
+        // }
+        var phone = document.forms['myForm']["fphone"].value;
+        if (phone.length != 10 || !/^\d+$/.test(phone)) {
+            seterror("phone", "* Phone number must be 10 digits");
+            returnval = false;
+        }
+
+
+
+        return returnval;
+    }
+    console.log(returnval)
+    var currentDate = new Date();
+
+    function getBookingDate() {
+        var bookingDate = document.getElementById('bookingDate').value;
+        alert('Selected booking date: ' + bookingDate);
+    }
+    function toggleOtherServices() {
+        var otherServicesInput = document.getElementById('otherServicesInput');
+        var othersRadio = document.getElementById('others');
+
+        if (othersRadio.checked) {
+            otherServicesInput.style.display = 'block';
+            otherServicesInput.focus();
+        } else {
+            otherServicesInput.style.display = 'none';
+            otherServicesInput.value = '';
+        }
+    }
+    var radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(function (radioButton) {
+        radioButton.addEventListener('change', toggleOtherServices);
+        toggleOtherServices();
+
+    });
+
+
+
+
+
+</script>
+
+</html>
