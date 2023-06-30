@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript form submission alert</title>
+    <style>
+        .alert {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form[name="myForm"]').addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission behavior
+
+                // Create an alert element
+                var alertElement = document.createElement('div');
+                alertElement.className = 'alert';
+                alertElement.textContent = 'Form submitted!';
+
+                // Insert the alert element at the top of the body
+                document.body.insertBefore(alertElement, document.body.firstChild);
+
+                // Automatically remove the alert after 3 seconds
+                setTimeout(function () {
+                    alertElement.remove();
+                }, 3000);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form name="myForm">
+        <div class="formdesign" id="name">
+            Name: <input type="text" name="fname" required>
+        </div>
+        <div>
+            <input class="but" type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+
+</html>
