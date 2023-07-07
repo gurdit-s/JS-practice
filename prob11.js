@@ -16,9 +16,9 @@
 
 function getOddNum(array){
 let newArr = [];
-for(let number of array){
-    if(number % 2 !== 0){
-      newArr.push(number);
+for(let i=0; i<array.length; i++){
+    if(array[i] % 2 !== 0){
+      newArr.push(array[i]);
     } 
 }
       return newArr;
