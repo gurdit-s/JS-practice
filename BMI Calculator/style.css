@@ -1,0 +1,22 @@
+body{
+    background-color: rgb(157, 152, 152);
+}
+h1, form{
+    text-align: center;
+}
+h1{
+    font-size: 50px;
+}
+p, button{
+    font-size: 30px;
+}
+h2{
+    font-size: 35px;
+}
+input{
+    padding: 6px;
+    font-size: 20px;
+}
+#results{
+    font-size: 25px;
+}
