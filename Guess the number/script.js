@@ -80,6 +80,7 @@ function newGame() {
       remaining.innerHTML = `${11 - numGuess} `;
       userInput.removeAttribute('disabled');
       startOver.removeChild(p);
+      lowOrHi.innerHTML = "";
   
       playGame = true;
     });
